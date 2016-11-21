@@ -1,0 +1,3 @@
+routing_list:
+    path:     /admin/routes
+    defaults: { _controller: RoutingBundle:Default:router }

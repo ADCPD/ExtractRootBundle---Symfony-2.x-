@@ -1,0 +1,52 @@
+{% extends '::admin_dash.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/blogstyle/css/jquery.dataTables.min.css') }}">
+{% endblock %}
+{% block breadcrumb %}
+    {{ parent() }}
+    <li><a href="{{ path('routing_list') }}">Gestion des pages</a> <span class="divider">/</span></li>
+    <li class="active">Routing liste</li>
+{% endblock %}
+{% block Dashnoard -%}
+    <div class="container marketing">
+        <div class="row well">
+            <div class="page-header">
+                <h1>Routing
+                    <small>{{ 'List'|trans }}</small>
+                </h1>
+            </div>
+
+            <table class="table table-bordered" id="user-table">
+                <thead>
+                <tr>
+
+                    <th>Path</th>
+                    <th>Method</th>
+                    <th>Controller</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for route in routes %}
+                    <tr>
+                        <td>{{ route.path }}</td>
+                        <td>{{ route.methods|length > 0 ? route.methods|join(', ') : 'ANY' }}</td>
+                        <td>{{ route.defaults._controller }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+        {% block javascripts %}
+            {{ parent() }}
+            <script src="{{ asset('bundles/blogstyle/js/jquery.dataTables.min.js') }}"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#user-table').DataTable();
+                });
+            </script>
+        {% endblock %}
